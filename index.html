@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pick-up Stock Record</title>
+<title>Self Pick-Up Tracker</title>
 <meta name="description" content="Simple tracker for self pick-up stock records">
 <style>
 :root{--bg:#cbb8ee;--card:#fff;--soft:#f4f0fb;--ink:#1f1535;--mute:#6f6488;--line:#e3daf3;--acc:#7a35cf;--acc-ink:#fff;--bad:#d4452f;--badbg:#fde9e4;--okbg:#e0f6f1;--ok:#14806f;
@@ -36,6 +36,7 @@ input[type=date],input[type=time]{display:block;width:100%;min-width:0;max-width
 .ghost{background:none;border:0;color:var(--acc);font:inherit;font-weight:700;cursor:pointer;padding:6px 2px}
 .add{width:100%;padding:12px;border-radius:14px;border:2px dashed var(--acc);background:none;color:var(--acc);font:inherit;font-weight:700;cursor:pointer;margin-top:10px}
 .bc{background:var(--soft);border-radius:18px;padding:14px;margin-bottom:12px}
+.bc>input{background:var(--card);border:2px solid var(--line)}
 .bc .top,.it .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .it{background:var(--card);border-radius:14px;padding:12px;margin-top:10px}
 .it input,.it textarea{background:var(--soft)}
@@ -53,7 +54,7 @@ h3{margin:28px 4px 10px;font-size:20px}
 .meta{color:var(--mute);font-size:14px;margin:2px 0 8px}
 .rb{background:var(--soft);border-radius:14px;padding:10px 12px;margin-top:8px}
 .tag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:700;margin:2px 4px 2px 0}
-.tag.ok{background:var(--okbg);color:var(--ok)}.tag.bad{background:var(--badbg);color:var(--bad)}
+.tag.ok{background:var(--okbg);color:var(--ok)}.tag.bad{background:var(--badbg);color:var(--bad)}.tag.wait{background:var(--card);color:var(--acc);border:1px solid var(--line)}
 .line{font-size:14px;margin:6px 0 0}
 .del.sure{color:var(--bad);font-weight:700}
 .empty{color:var(--mute);text-align:center;padding:22px 16px;background:var(--card);border-radius:20px}
@@ -68,7 +69,7 @@ h3{margin:28px 4px 10px;font-size:20px}
 </head>
 <body>
 <main>
-<div class="hero"><span id="hero"></span><div><h1>Pick-up Record</h1><p class="sub">Track every stock pick-up, one small step at a time.</p></div></div>
+<div class="hero"><span id="hero"></span><div><h1>Self Pick-Up Tracker!</h1><p class="sub">Not sure if this helps, but let's keep track anyway! Hehe.</p></div></div>
 
 <nav class="tabs"><button type="button" id="t-new" aria-current="page">New record</button><button type="button" id="t-rec" aria-current="false">Records</button></nav>
 <section id="pg-new">
@@ -125,12 +126,12 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;
 function face(k,c,s){var sh=k==="c"?'<circle cx="50" cy="52" r="42" fill="'+c+'"/>':k==="p"?'<polygon points="50,8 92,38 76,90 24,90 8,38" fill="'+c+'" stroke="'+c+'" stroke-width="10" stroke-linejoin="round"/>':'<rect x="8" y="16" width="84" height="72" rx="34" fill="'+c+'"/>';
 return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 100 100" aria-hidden="true">'+sh+'<circle cx="35" cy="54" r="7" fill="#1f1535"/><circle cx="65" cy="54" r="7" fill="#1f1535"/><circle cx="37" cy="52" r="2.4" fill="#fff"/><circle cx="67" cy="52" r="2.4" fill="#fff"/><path d="M42 68q8 7 16 0" stroke="#1f1535" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>'}
 document.querySelectorAll("[data-f]").forEach(function(e){var a=e.dataset.f.split("|");e.innerHTML=face(a[0],a[1],34)});
-$("hero").innerHTML='<svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true"><path d="M20 30q10-24 38-16t30 30q8 26-20 38T24 78Q6 56 20 30z" fill="#f4a6c8"/><polygon points="50,24 78,44 68,76 32,76 22,44" fill="#5b79c9" stroke="#5b79c9" stroke-width="8" stroke-linejoin="round"/><circle cx="40" cy="52" r="5" fill="#1f1535"/><circle cx="60" cy="52" r="5" fill="#1f1535"/><path d="M44 62q6 5 12 0" stroke="#1f1535" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+$("hero").innerHTML='<svg width="104" height="98" viewBox="0 0 160 150" aria-hidden="true" stroke-linejoin="round" stroke-linecap="round"><path d="M132 34q9-7 1-14t7-13" fill="none" stroke="#1f1535" stroke-width="4"/><path d="M8 100h20M3 114h24M11 128h18" fill="none" stroke="#1f1535" stroke-width="4"/><path d="M44 46L46 14L74 32Z" fill="#fffdf6" stroke="#1f1535" stroke-width="5"/><path d="M116 46L114 14L86 32Z" fill="#fffdf6" stroke="#1f1535" stroke-width="5"/><path d="M50 38L51 22L65 31Z" fill="#f6c5bd"/><path d="M110 38L109 22L95 31Z" fill="#f6c5bd"/><ellipse cx="80" cy="64" rx="46" ry="36" fill="#fffdf6" stroke="#1f1535" stroke-width="5"/><path d="M68 34l2 12M80 32v14M92 34l-2 12" stroke="#b5aca4" stroke-width="6" fill="none"/><ellipse cx="62" cy="66" rx="7" ry="3.5" fill="#1f1535"/><ellipse cx="98" cy="66" rx="7" ry="3.5" fill="#1f1535"/><path d="M76 74q4 5 4 0q0 5 4 0" stroke="#1f1535" stroke-width="3.5" fill="none"/><path d="M30 66h12M32 77l11-3M130 66h-12M128 77l-11-3" stroke="#1f1535" stroke-width="3.5" fill="none"/><rect x="42" y="98" width="76" height="44" rx="7" fill="#e6b36e" stroke="#1f1535" stroke-width="5"/><rect x="72" y="100" width="16" height="40" fill="#f6d79c"/><path d="M72 98v44M88 98v44" stroke="#1f1535" stroke-width="3.5"/><rect x="94" y="118" width="17" height="12" rx="2" fill="#fffdf6" stroke="#1f1535" stroke-width="3"/><ellipse cx="40" cy="104" rx="11" ry="9" fill="#fffdf6" stroke="#1f1535" stroke-width="5"/><ellipse cx="120" cy="104" rx="11" ry="9" fill="#fffdf6" stroke="#1f1535" stroke-width="5"/></svg>';
 function newI(){return{no:"",ok:null,r:""}}
-function newB(){return{name:"",items:[newI()]}}
+function newB(){return{name:"",wait:null,wr:"",wl:"",items:[newI()]}}
 var st={people:load(PK),sel:[],edit:false,editing:null,br:[newB()]},recs=load(RK),bl=load(BK),fl=load("pickup-from");
 /* ===== SETTINGS: paste your Google Apps Script web app link and the same secret word as in Code.gs ===== */
-var GAS="https://script.google.com/macros/s/AKfycbytRtELbPIWBbJzOoNWu4Zc8A503IzPZro-9XbuJQw1m_5mgTcTy2us6b727HvDLgX3Aw/exec",KEY="change-this-key";
+var GAS="https://script.google.com/macros/s/AKfycbw7ILc2ZipUzBKm4TgDjRlEijMvNl-D8xQF91QD3xrYUtPP_nNnEDfsARJoh8pVwLM/exec",KEY="change-this-key";
 function newId(){return"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 recs.forEach(function(r){if(!r._id)r._id=newId()});store(RK,recs);
 var on=GAS.indexOf("https://")===0,q=Promise.resolve(),pending=0,seeded=false;
@@ -157,7 +158,7 @@ $("editp").onclick=function(){st.edit=!st.edit;rp()};
 $("addp").onclick=function(){var n=$("newp").value.trim();if(!n)return;if(st.people.indexOf(n)<0)st.people.push(n);st.sel=[n];saveLists();$("newp").value="";rp()};
 document.querySelectorAll("#transport .opt").forEach(function(b){b.onclick=function(){b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true")}});
 function yn(act,b,p,k,v){var a=' data-act="yn" data-b="'+b+'"'+(p!==null?' data-p="'+p+'"':"")+' data-k="'+k+'"';
-return'<div class="opts yn"><button type="button" class="opt"'+a+' data-v="yes" aria-pressed="'+(v==="yes")+'">Yes</button><button type="button" class="opt no"'+a+' data-v="no" aria-pressed="'+(v==="no")+'">No</button></div>'}
+return'<div class="opts yn"><button type="button" class="opt"'+a+' data-v="yes" aria-pressed="'+(v==="yes")+'">Yes</button><button type="button" class="opt'+(k==="wait"?"":" no")+'"'+a+' data-v="no" aria-pressed="'+(v==="no")+'">No</button></div>'}
 function why(lbl,b,p,f,val){return'<div class="why"><label>'+lbl+'</label><textarea rows="2" placeholder="Type the reason" data-b="'+b+'"'+(p!==null?' data-p="'+p+'"':"")+' data-f="'+f+'">'+esc(val)+'</textarea></div>'}
 function rb(){$("bl").id="bl";$("branches").innerHTML=st.br.map(function(b,i){
 return'<div class="bc"><div class="top"><b>Branch '+(i+1)+'</b>'+(st.br.length>1?'<button type="button" class="x" data-act="delb" data-b="'+i+'">Remove</button>':"")+'</div>'+
@@ -167,7 +168,7 @@ return'<div class="it"><div class="top"><span class="hint" style="margin:0">Prod
 '<input placeholder="Item no." data-b="'+i+'" data-p="'+j+'" data-f="no" value="'+esc(it.no)+'">'+
 '<p class="q" style="margin-top:10px">Condition OK?</p>'+yn("yn",i,j,"ok",it.ok)+(it.ok==="no"?why("What is damaged?",i,j,"r",it.r):"")+'</div>'}).join("")+
 '<button type="button" class="add" data-act="addi" data-b="'+i+'">+ Add product</button>'+
-'</div>'}).join("");
+'<p class="q">Any waiting time?</p>'+yn("yn",i,null,"wait",b.wait)+(b.wait==="yes"?'<p class="q" style="margin-top:10px">What time did we reach the store?</p><input type="time" style="max-width:calc(50% - 4px)" aria-label="Time reached the store" data-b="'+i+'" data-f="wr" value="'+esc(b.wr||"")+'"><p class="q" style="margin-top:10px">What time did we leave the store?</p><input type="time" style="max-width:calc(50% - 4px)" aria-label="Time left the store" data-b="'+i+'" data-f="wl" value="'+esc(b.wl||"")+'">':"")+'</div>'}).join("");
 $("bl").innerHTML=bl.map(function(x){return'<option value="'+esc(x)+'">'}).join("")}
 $("branches").oninput=function(e){var t=e.target;if(t.dataset.f===undefined)return;var b=st.br[+t.dataset.b],o=t.dataset.p!==undefined?b.items[+t.dataset.p]:b;o[t.dataset.f]=t.value};
 $("branches").onclick=function(e){var t=e.target.closest("button");if(!t||!t.dataset.act)return;var a=t.dataset.act,b=st.br[+t.dataset.b];
@@ -175,6 +176,9 @@ if(a==="yn"){var o=t.dataset.p!==undefined?b.items[+t.dataset.p]:b;o[t.dataset.k
 else if(a==="delb")st.br.splice(+t.dataset.b,1);else if(a==="deli")b.items.splice(+t.dataset.p,1);else if(a==="addi")b.items.push(newI());
 rb()};
 $("addb").onclick=function(){st.br.push(newB());rb()};
+function mins(a,b){if(!a||!b)return null;var x=a.split(":"),y=b.split(":"),d=(+y[0]*60+ +y[1])-(+x[0]*60+ +x[1]);return d<0?d+1440:d}
+function dur(m){if(m===null||m===undefined||isNaN(m))return"";var h=Math.floor(m/60),n=m%60;return h?h+"hr"+(n?" "+n+"min":""):n+"min"}
+function mn(a,b){var v=mins(a,b);return v===null?"":v}
 function tm(t){var d=new Date("2000-01-01T"+t);return isNaN(d)?t:d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})}
 function fmt(r){var d=new Date(r.date+"T"+r.time);return isNaN(d)?r.date+" "+r.time:d.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})+", "+d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})}
 function tag(ok,y,n){return'<span class="tag '+(ok==="yes"?"ok":"bad")+'">'+(ok==="yes"?y:n)+'</span>'}
@@ -182,8 +186,8 @@ function rl(){var el=$("list");$("t-rec").textContent="Records ("+recs.length+")
 if(!recs.length){el.innerHTML='<div class="empty">'+face("c","#f9a825",64)+'No records yet. Fill in the steps above and tap Save record.</div>';return}
 el.innerHTML=recs.map(function(r,i){var bs=r.branches||[{name:r.branch,complete:r.complete,rc:r.rc,items:[]}];
 return'<div class="rec"><div class="top"><b>'+esc((r.people||[]).join(", ")||"Pick-up")+'</b><span><button class="x edit" data-i="'+i+'" type="button">Edit</button><button class="x del" data-i="'+i+'" type="button">Delete</button></span></div>'+
-'<div class="meta">'+(r.from?'From '+esc(r.from)+' · ':'')+'Depart '+esc(fmt(r))+' · '+(r.arr?'Reached office '+esc(tm(r.arr)):'Not reached office yet')+' · '+esc(r.transport.join(" + "))+(r.fare!==""&&r.fare!==undefined?' · S$'+Number(r.fare).toFixed(2):'')+'</div>'+
-bs.map(function(b){return'<div class="rb"><b>'+esc(b.name)+'</b>'+
+'<div class="meta">'+(r.from?'From '+esc(r.from)+' · ':'')+'Depart '+esc(fmt(r))+' · '+(r.arr?'Reached office '+esc(tm(r.arr))+' <span class="tag wait" style="margin:0 0 0 2px">Trip '+esc(dur(mins(r.time,r.arr)))+'</span>':'Not reached office yet')+' · '+esc(r.transport.join(" + "))+(r.fare!==""&&r.fare!==undefined?' · S$'+Number(r.fare).toFixed(2):'')+'</div>'+
+bs.map(function(b){return'<div class="rb"><b>'+esc(b.name)+'</b>'+(b.wait==="yes"&&b.wr&&b.wl?'<br><span class="tag wait">Waited '+esc(dur(mins(b.wr,b.wl)))+' · '+esc(tm(b.wr))+' to '+esc(tm(b.wl))+'</span>':'')+
 b.items.map(function(it){return'<p class="line">'+esc(it.no||"")+'<br>'+tag(it.ok,"Condition OK","Damaged")+(it.r?esc(it.r):"")+'</p>'}).join("")+'</div>'}).join("")+'</div>'}).join("");
 el.querySelectorAll(".del").forEach(function(b){b.onclick=function(){
 if(!b.classList.contains("sure")){b.classList.add("sure");b.textContent="Tap again";setTimeout(function(){b.classList.remove("sure");b.textContent="Delete"},3000);return}
@@ -201,42 +205,44 @@ if(!b.name.trim())m=n+"type the branch name.";
 else if(!its.length)m=n+"add at least one product (item no.).";
 else if(its.some(function(x){return!x.ok}))m=n+"answer Condition OK for each product.";
 else if(its.some(function(x){return x.ok==="no"&&!x.r.trim()}))m=n+"type what is damaged.";
+else if(!b.wait)m=n+"answer if there is any waiting time.";
+else if(b.wait==="yes"&&(!b.wr||!b.wl))m=n+"choose the time we reached and left the store.";
 return!!m});
 $("err").textContent=m;if(m){$("err").scrollIntoView({block:"center"});return}
-var brs=st.br.map(function(b){return{name:b.name.trim(),items:b.items.filter(function(x){return x.no.trim()}).map(function(x){return{no:x.no.trim(),ok:x.ok,r:x.ok==="no"?x.r.trim():""}})}});
+var brs=st.br.map(function(b){return{name:b.name.trim(),wait:b.wait,wr:b.wait==="yes"?b.wr:"",wl:b.wait==="yes"?b.wl:"",items:b.items.filter(function(x){return x.no.trim()}).map(function(x){return{no:x.no.trim(),ok:x.ok,r:x.ok==="no"?x.r.trim():""}})}});
 var rec={from:$("from").value.trim(),date:$("date").value,time:$("time").value,arr:$("arr").value,fare:$("fare").value===""?"":parseFloat($("fare").value),transport:tr,people:st.sel.slice(),branches:brs};commit(rec,st.editing!==null?st.editing:newId());if(rec.from&&fl.indexOf(rec.from)<0)fl.push(rec.from);ffl();
 brs.forEach(function(b){if(bl.indexOf(b.name)<0)bl.push(b.name)});saveLists();
 reset();rl();location.hash="records"};
 $("copy").onclick=function(){var b=$("copy");function done(s){b.textContent=s;setTimeout(function(){b.textContent="Copy as text"},2000)}
-var t=sorted().map(function(r){return fmt(r)+(r.from?" | From "+r.from:"")+" | Reach office "+(r.arr?tm(r.arr):"-")+" | "+(r.people||[]).join(", ")+" | "+r.transport.join("+")+(r.fare!==""&&r.fare!==undefined?" | S$"+Number(r.fare).toFixed(2):"")+"\n"+(r.branches||[]).map(function(x){return"  "+x.name+"\n"+x.items.map(function(i){return"    "+(i.no||"")+" | Condition OK: "+i.ok+(i.r?" ("+i.r+")":"")}).join("\n")}).join("\n")}).join("\n\n");
+var t=sorted().map(function(r){return fmt(r)+(r.from?" | From "+r.from:"")+" | Reach office "+(r.arr?tm(r.arr)+" (trip "+dur(mins(r.time,r.arr))+")":"-")+" | "+(r.people||[]).join(", ")+" | "+r.transport.join("+")+(r.fare!==""&&r.fare!==undefined?" | S$"+Number(r.fare).toFixed(2):"")+"\n"+(r.branches||[]).map(function(x){return"  "+x.name+(x.wait==="yes"&&x.wr&&x.wl?" | Waiting "+dur(mins(x.wr,x.wl))+" ("+tm(x.wr)+" to "+tm(x.wl)+")":"")+"\n"+x.items.map(function(i){return"    "+(i.no||"")+" | Condition OK: "+i.ok+(i.r?" ("+i.r+")":"")}).join("\n")}).join("\n")}).join("\n\n");
 try{navigator.clipboard.writeText(t).then(function(){done("Copied")},function(){done("Copy not allowed")})}catch(e){done("Copy not allowed")}};
-var HEAD=["Date","Depart time","Depart from","Reach office","Who went","Transport","Fare (SGD)","Branch","Item no.","Condition OK?","Damage reason"];
+var HEAD=["Date","Depart time","Depart from","Reach office","Trip time (min)","Who went","Transport","Fare (SGD)","Branch","Waiting?","Reach store","Leave store","Wait (min)","Item no.","Condition OK?","Damage reason"];
 function yes(v){return v?(v==="yes"?"Yes":"No"):""}
 function sorted(){return recs.slice().sort(function(a,b){return(a.date+a.time)<(b.date+b.time)?-1:1})}
 function dlabel(d){var x=new Date(d+"T00:00");return isNaN(x)?d:x.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
-function rows(){var o=[];sorted().forEach(function(r){var fi=1;(r.branches||[{name:r.branch,complete:r.complete,rc:r.rc,items:[]}]).forEach(function(b){(b.items.length?b.items:[{}]).forEach(function(i){o.push([r.date,r.time,r.from||"",r.arr||"",(r.people||[]).join(", "),r.transport.join(" + "),(fi&&r.fare!==""&&r.fare!==undefined?Number(r.fare):""),b.name,i.no||"",yes(i.ok),i.r||""]);fi=0})})});return o}
+function rows(){var o=[];sorted().forEach(function(r){var fi=1;(r.branches||[{name:r.branch,complete:r.complete,rc:r.rc,items:[]}]).forEach(function(b){var bf=1;(b.items.length?b.items:[{}]).forEach(function(i){o.push([r.date,r.time,r.from||"",r.arr||"",(fi&&r.arr?mn(r.time,r.arr):""),(r.people||[]).join(", "),r.transport.join(" + "),(fi&&r.fare!==""&&r.fare!==undefined?Number(r.fare):""),b.name,yes(b.wait),(bf?b.wr||"":""),(bf?b.wl||"":""),(bf&&b.wait==="yes"?mn(b.wr,b.wl):""),i.no||"",yes(i.ok),i.r||""]);fi=0;bf=0})})});return o}
 function fb(id,t,lbl){var b=$(id);b.textContent=t;setTimeout(function(){b.textContent=lbl},2500)}
 function send(id,lbl,name,data){
 if(!recs.length){fb(id,"No records yet",lbl);return}
 try{var f=new Blob([data],{type:/pdf$/.test(name)?"application/pdf":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});var a=document.createElement("a");a.href=URL.createObjectURL(f);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},4000);fb(id,"Saved",lbl)}catch(e){fb(id,"Could not save",lbl)}}
 $("xl").onclick=function(){if(typeof XLSX==="undefined"){fb("xl","Not available here","Save as Excel");return}
-var ws=XLSX.utils.aoa_to_sheet([HEAD].concat(rows()));ws["!cols"]=[12,12,18,12,20,12,11,18,12,10,22].map(function(w){return{wch:w}});
+var ws=XLSX.utils.aoa_to_sheet([HEAD].concat(rows()));ws["!cols"]=[12,12,18,12,14,20,12,11,18,10,12,12,10,12,14,24].map(function(w){return{wch:w}});
 var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Pick-ups");
 send("xl","Save as Excel","pickup-records.xlsx",XLSX.write(wb,{bookType:"xlsx",type:"array"}))};
 $("pdf").onclick=function(){if(!window.jspdf){fb("pdf","Not available here","Save as PDF");return}
 var d=new window.jspdf.jsPDF(),y=16;
 function w(t,sz,bold,ind){d.setFontSize(sz);d.setFont("helvetica",bold?"bold":"normal");d.splitTextToSize(String(t),182-ind).forEach(function(l){if(y>282){d.addPage();y=16}d.text(l,14+ind,y);y+=sz*0.5+1.6})}
 w("Pick-up Stock Record",18,1,0);y+=3;
-var last="";sorted().forEach(function(r){if(r.date!==last){last=r.date;y+=4;w(dlabel(r.date),14,1,0)}y+=2;w((r.people||[]).join(", ")||"Pick-up",12,1,3);w((r.from?"From "+r.from+" at ":"Depart ")+tm(r.time)+" | Reach office "+(r.arr?tm(r.arr):"-")+" | "+r.transport.join(" + ")+(r.fare!==""&&r.fare!==undefined?" | Fare S$"+Number(r.fare).toFixed(2):""),10,0,3);
+var last="";sorted().forEach(function(r){if(r.date!==last){last=r.date;y+=4;w(dlabel(r.date),14,1,0)}y+=2;w((r.people||[]).join(", ")||"Pick-up",12,1,3);w((r.from?"From "+r.from+" at ":"Depart ")+tm(r.time)+" | Reach office "+(r.arr?tm(r.arr)+" (trip "+dur(mins(r.time,r.arr))+")":"-")+" | "+r.transport.join(" + ")+(r.fare!==""&&r.fare!==undefined?" | Fare S$"+Number(r.fare).toFixed(2):""),10,0,3);
 (r.branches||[{name:r.branch,complete:r.complete,rc:r.rc,items:[]}]).forEach(function(b){y+=1.5;
-w("Branch: "+b.name,11,1,4);
+w("Branch: "+b.name,11,1,4);if(b.wait==="yes"&&b.wr&&b.wl)w("Waiting "+dur(mins(b.wr,b.wl))+" ("+tm(b.wr)+" to "+tm(b.wl)+")",10,0,8);
 b.items.forEach(function(i){w("- "+(i.no||"")+" - "+(i.ok==="yes"?"Condition OK":"Damaged"+(i.r?" ("+i.r+")":"")),10,0,8)})});y+=2});
 send("pdf","Save as PDF","pickup-records.pdf",d.output("arraybuffer"))};
 function ffl(){$("fl").innerHTML=fl.map(function(x){return'<option value="'+esc(x)+'">'}).join("")}
 function reset(){$("from").value="";st.sel=[];st.br=[newB()];st.editing=null;document.querySelectorAll("#transport .opt").forEach(function(o){o.setAttribute("aria-pressed","false")});$("arr").value="";$("fare").value="";$("banner").hidden=true;$("save").textContent="Save record";setNow();rp();rb()}
 function edit(i){var r=recs[i],bs=r.branches||[{name:r.branch,complete:r.complete,rc:r.rc,items:[]}];
 st.editing=r._id;st.sel=(r.people||[]).slice();st.sel.forEach(function(p){if(st.people.indexOf(p)<0)st.people.push(p)});
-st.br=bs.map(function(b){return{name:b.name,items:b.items.length?b.items.map(function(x){return{no:x.no||"",ok:x.ok,r:x.r||""}}):[newI()]}});
+st.br=bs.map(function(b){return{name:b.name,wait:b.wait||"no",wr:b.wr||"",wl:b.wl||"",items:b.items.length?b.items.map(function(x){return{no:x.no||"",ok:x.ok,r:x.r||""}}):[newI()]}});
 $("from").value=r.from||"";$("date").value=r.date;$("time").value=r.time;$("arr").value=r.arr||"";$("fare").value=r.fare===undefined?"":r.fare;
 document.querySelectorAll("#transport .opt").forEach(function(o){o.setAttribute("aria-pressed",r.transport.indexOf(o.textContent)>-1)});
 $("banner").hidden=false;$("save").textContent="Save changes";rp();rb();location.hash="new";window.scrollTo(0,0)}
